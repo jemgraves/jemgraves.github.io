@@ -4,6 +4,7 @@ Description: Basic profile page.
 Author: Jennifer M. Graves
 Date: 07-19-2016
 Changelog: (07-19-2016) - Initial creation.
+			(07-30-2016) - Added call to Google for jquery library.
 -------------------------------------- -->
 <html>
 
@@ -11,6 +12,39 @@ Changelog: (07-19-2016) - Initial creation.
     <title>Jen M. Graves</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('img.svg').each(function(){
+            var $img = jQuery(this);
+            var imgID = $img.attr('id');
+            var imgClass = $img.attr('class');
+            var imgURL = $img.attr('src');
+
+            jQuery.get(imgURL, function(data) {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find('svg');
+
+                // Add replaced image's ID to the new SVG
+                if(typeof imgID !== 'undefined') {
+                    $svg = $svg.attr('id', imgID);
+                }
+
+                // Add replaced image's classes to the new SVG
+                if(typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass+' replaced-svg');
+                }
+
+                // Remove any invalid XML tags as per http://validator.w3.org
+                $svg = $svg.removeAttr('xmlns:a');
+
+                // Replace image with new SVG
+                $img.replaceWith($svg);
+
+            });
+        });
+    });
+    </script>
 </head>
 
 <body>
@@ -35,17 +69,17 @@ Changelog: (07-19-2016) - Initial creation.
         <ul class="social">
             <li>
                 <a href="https://github.com/jemgraves">
-                	<img src="images/Github.svg" />
+                	<img class="svg" id="github-icon" src="images/Github.svg" />
                 </a>
             </li>
             <li>
                 <a href="https://www.linkedin.com/in/jennifer-graves-49455436">
-                    <img src="images/Linkedin.svg" />
+                    <img class="svg" id="linkedin-icon" src="images/Linkedin.svg" />
                 </a>
             </li>
             <li>
                 <a href="https://twitter.com/jemgraves">
-                    <img src="images/Twitter.svg" />
+                    <img class="svg" id="twitter-icon" src="images/Twitter.svg" />
                 </a>
             </li>
         </ul>
