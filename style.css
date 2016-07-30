@@ -135,6 +135,6 @@ header img {
 	min-width: 50px;
 }
 
-#twitter-icon:hover path {
-	fill: blue;
+.svg:hover path {
+	fill: rgba(255, 0, 0, .5);
 }
