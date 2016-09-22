@@ -135,6 +135,6 @@ header img {
 	min-width: 50px;
 }
 
-.svg:hover path {
+.svg:hover circle {
 	fill: rgb(204, 100, 112);
 }
